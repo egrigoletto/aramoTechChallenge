@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aramo Telefonia - Se ligue com a gente!</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="axios.js" defer></script>
+    <script src="scripts.js" defer></script>
+</head>
+
+<body>
+    <p>
+        <label for="dddOrigem">Escolha uma localidade de origem:</label>
+        <select id="dddOrigem">
+            <option value="11" selected>011</option>
+            <option value="16">016</option>
+            <option value="17">017</option>
+            <option value="18">018</option>
+        </select>
+
+        <label for="dddDestino">Escolha uma localidade destino:</label>
+        <select id="dddDestino">
+            <option value="11" selected>011</option>
+            <option value="16">016</option>
+            <option value="17">017</option>
+            <option value="18">018</option>
+        </select>
+    </p>
+    <label for="tipoPlano">Qual plano gostaria de consultar?</label>
+    <select id="tipoPlano">
+        <option value="FaleMais 30" selected>FaleMais 30</option>
+        <option value="FaleMais 60">FaleMais 60</option>
+        <option value="FaleMais 120">FaleMais 120</option>
+    </select>
+    <label for="tempoLigacao">Qual a duração da ligação em minutos?</label>
+        <input type="text" id="tempoLigacao" placeholder="99"><br><br>
+    <p>
+        <span id="val_tarifa_plano"></span></br>
+        <span id="val_tarifa_normal"></span></br>
+        <span id="msg_fim"></span>
+        <span id="val_tarifa_inex"></span></br>
+    </p>
+    <section id="control-center">
+        <button id="calcBtn">Calcular</button>
+    </section>
+</body>
+
+</html>
