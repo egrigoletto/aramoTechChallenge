@@ -9,6 +9,6 @@ Este reprositório contém uma prova feita para um processo seletivo, ele se bas
 
 Para ser executado cálculo, foram criadas apis que recuperam os valors fixos de tarifas locais e o valor de minutos gratuitos que cada plano pode ter como benefício. Com esses valores como base os minutos adicionais, se aplicável, serão calculados com o acréscimo e são exibidos numa página HTML está estática .
 
-##Como usar
+## Como usar
 
 Clone o repositório e execute o index.
