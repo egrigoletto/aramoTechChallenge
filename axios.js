@@ -3,10 +3,6 @@ let tarifaNormal = document.getElementById('val_tarifa_normal');
 let tarifaPlano = document.getElementById('val_tarifa_plano');
 let tarifaIndisp = document.getElementById('val_tarifa_inex');
 let msgFim = document.getElementById('msg_fim');
-// let chkOrigem = document.getElementById('DDD_origem');
-// let dddOrigem = "18";
-// let dddDestino = "17";
-// let nomePlano = "FaleMais 30"
 let minutosSolicitados = 100;
 let tarifa = 0;
 let valorLigacaoConvencional = 0;
@@ -48,12 +44,4 @@ const calcularTarifas = () => {
         });
 };
 
-// const buscarCidadeOrigem = () => {
-//     let select1 = document.getElementById('DDD_origem').value;
-//     if (select1 == "11")
-//      alert('São Paulo');
-// }
-
-
 calcBtn.addEventListener('click', calcularTarifas);
-// chkOrigem.addEventListener('change', buscarCidadeOrigem);
