@@ -3,7 +3,11 @@ let tarifaNormal = document.getElementById('val_tarifa_normal');
 let tarifaPlano = document.getElementById('val_tarifa_plano');
 let tarifaIndisp = document.getElementById('val_tarifa_inex');
 let msgFim = document.getElementById('msg_fim');
-let minutosSolicitados = 100;
+let baseTarifaPlano = document.getElementById('base_tarifa_plano');
+let baseTarifaNormal = document.getElementById('base_tarifa_normal');
+let baseTarifaInex = document.getElementById('base_tarifa_inex');
+let baseMagFim = document.getElementById('base_msg_fim');
+let rstBtn = document.getElementById('rstBtn');
 let tarifa = 0;
 let valorLigacaoConvencional = 0;
 let valorLigacaoFranquiada = 0;
@@ -22,20 +26,36 @@ const calcularTarifas = () => {
     axios.get('https://telecomaramo.glitch.me/tarifaLocal')
         .then(response => {
             let franquiaLocal = response.data.filter(item => item.origem == dddOrigem && item.destino == dddDestino)[0];
-            if (franquiaLocal && franquiaLocal.origem && franquiaLocal.destino){
+            if (franquiaLocal && franquiaLocal.origem && franquiaLocal.destino) {
                 axios.get('https://telecomaramo.glitch.me/planosFaleMais')
-                .then(response => {
-                    let franquiaFalemais = response.data.filter(item => item.nome == nomePlano)[0];
-                    valorLigacaoConvencional = franquiaLocal.valor * minutosSolicitados;
-                    valorLigacaoFranquiada = 0;
-                    for(i=0;i<(minutosSolicitados - franquiaFalemais.minutosFranquia);i++){
-                        valorLigacaoFranquiada += franquiaLocal.valor + (franquiaLocal.valor * 0.1)
-                     }
-                     tarifaNormal.innerText = "O valor de uma ligação sem o plano " + franquiaFalemais.nome + " é de " + valorLigacaoConvencional.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-                     tarifaPlano.innerText = "O valor de uma ligação com o plano " + franquiaFalemais.nome + " é de " + valorLigacaoFranquiada.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-                     msgFim.innerText = "Viu só com a Aramo Telecom você só tem a ganhar, se liga com a gente! 😉"
-                });
+                    .then(response => {
+                        let franquiaFalemais = response.data.filter(item => item.nome == nomePlano)[0];
+                        valorLigacaoConvencional = franquiaLocal.valor * minutosSolicitados;
+                        valorLigacaoFranquiada = 0;
+                        for (i = 0; i < (minutosSolicitados - franquiaFalemais.minutosFranquia); i++) {
+                            valorLigacaoFranquiada += franquiaLocal.valor + (franquiaLocal.valor * 0.1)
+                        }
+                        baseTarifaPlano.style.display = "block";
+                        baseTarifaNormal.style.display = "block";
+                        baseMagFim.style.display = "block";
+                        rstBtn.style.display = "inline";
+                        baseTarifaInex.style.display = "none";
+                        tarifaNormal.innerText = "O valor de uma ligação sem o plano " + franquiaFalemais.nome + " é de " + valorLigacaoConvencional.toLocaleString('pt-br', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        });
+                        tarifaPlano.innerText = "O valor de uma ligação com o plano " + franquiaFalemais.nome + " é de " + valorLigacaoFranquiada.toLocaleString('pt-br', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        });
+                        msgFim.innerText = "Viu só com a Aramo Telecom você só tem a ganhar, se liga com a gente! 😉"
+                    });
             } else {
+                baseTarifaInex.style.display = "block";
+                rstBtn.style.display = "inline";
+                baseTarifaPlano.style.display = "none";
+                baseTarifaNormal.style.display = "none";
+                baseMagFim.style.display = "none";
                 tarifaIndisp.innerText = "Esses DDDs de origem e destino não são atendidos pela Aramo Telecom nesse momento. 😔 \nMas não será por muito tempo! A Aramo Telecom está expandindo sua rede! 🤩\nFique Ligado!"
             }
         })
@@ -44,4 +64,23 @@ const calcularTarifas = () => {
         });
 };
 
+const limparValores = () => {
+    let minutosSolicitados = document.getElementById("tempoLigacao");
+    let dddOrigem = document.getElementById('dddOrigem');
+    let dddDestino = document.getElementById('dddDestino');
+    let nomePlano = document.getElementById('tipoPlano');
+
+    dddOrigem.value = "11";
+    dddDestino.value = "11";
+    nomePlano.value = "FaleMais 30";
+    minutosSolicitados.value = " ";
+    baseTarifaInex.style.display = "none";
+    rstBtn.style.display = "none";
+    baseTarifaPlano.style.display = "none";
+    baseTarifaNormal.style.display = "none";
+    baseMagFim.style.display = "none";
+
+};
+
+rstBtn.addEventListener("click", limparValores);
 calcBtn.addEventListener('click', calcularTarifas);
