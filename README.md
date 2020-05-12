@@ -12,3 +12,4 @@ Para ser executado cálculo, foram criadas apis que recuperam os valors fixos de
 ## Como usar
 
 Clone o repositório e execute o index.
+Algumas consultas podem demorar de um a três segundos, aguarde finalizar
