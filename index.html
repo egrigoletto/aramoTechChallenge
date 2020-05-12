@@ -2,50 +2,125 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aramo Telefonia - Se ligue com a gente!</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Quanto vou gastar com os planos FaleMais? 🗣️📞</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="axios.js" defer></script>
-    <script src="scripts.js" defer></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-    <p>
-        <label for="dddOrigem">Escolha uma localidade de origem:</label>
-        <select id="dddOrigem">
-            <option value="11" selected>011</option>
-            <option value="16">016</option>
-            <option value="17">017</option>
-            <option value="18">018</option>
-        </select>
-
-        <label for="dddDestino">Escolha uma localidade destino:</label>
-        <select id="dddDestino">
-            <option value="11" selected>011</option>
-            <option value="16">016</option>
-            <option value="17">017</option>
-            <option value="18">018</option>
-        </select>
-    </p>
-    <label for="tipoPlano">Qual plano gostaria de consultar?</label>
-    <select id="tipoPlano">
-        <option value="FaleMais 30" selected>FaleMais 30</option>
-        <option value="FaleMais 60">FaleMais 60</option>
-        <option value="FaleMais 120">FaleMais 120</option>
-    </select>
-    <label for="tempoLigacao">Qual a duração da ligação em minutos?</label>
-        <input type="text" id="tempoLigacao" placeholder="99"><br><br>
-    <p>
-        <span id="val_tarifa_plano"></span></br>
-        <span id="val_tarifa_normal"></span></br>
-        <span id="msg_fim"></span>
-        <span id="val_tarifa_inex"></span></br>
-    </p>
-    <section id="control-center">
-        <button id="calcBtn">Calcular</button>
-    </section>
+    <div id="tudo">
+        <div id="cabecalho">
+            <span id="escrita_titulo">Aramo Telecom</span>
+        </div>
+        <div class="container-fluid" id="container_principal">
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12" style="background-color:white">
+                    <div id="origem">
+                        <label for="dddOrigem">Qual o DDD de origem da ligação?</label><br />
+                        <select id="dddOrigem">
+                            <option value="11" selected>011</option>
+                            <option value="16">016</option>
+                            <option value="17">017</option>
+                            <option value="18">018</option>
+                        </select>
+                    </div>
+                    <br />
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12" style="background-color:white">
+                    <div id="destino">
+                        <label for="dddDestino">Qual o DDD de destino da ligação?</label><br />
+                        <select id="dddDestino">
+                            <option value="11" selected>011</option>
+                            <option value="16">016</option>
+                            <option value="17">017</option>
+                            <option value="18">018</option>
+                        </select>
+                    </div>
+                    <br />
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12" style="background-color:white">
+                    <div id="tmp_ligacao">
+                        <label for="tempoLigacao">
+                            Qual a duração da ligação em minutos?</label><br />
+                        <input type="text" id="tempoLigacao" size="2" /><br />
+                        <span id="texto_sob_numero">Apenas números</span><br />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12" id="base_tarifa_plano">
+                    <div class="alert alert-success">
+                        <span id="val_tarifa_plano">val_tarifa_plano</span>
+                    </div>
+                </div>
+                <div class="col-xl-12" id="base_tarifa_normal">
+                    <div class="alert alert-info">
+                        <span id="val_tarifa_normal">val_tarifa_normal</span>
+                    </div>
+                </div>
+                <div class="col-xl-12" id="base_tarifa_inex">
+                    <div class="alert alert-danger">
+                        <span id="val_tarifa_inex">val_tarifa_inex</span>
+                    </div>
+                </div>
+                <div class="col-xl-12" id="base_msg_fim">
+                    <div class="alert alert-warning">
+                        <span id="msg_fim">msg_fim</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-xl-8 col-md-8 col-sm-12" style="background-color:white">
+                    <div id="tmp_plano">
+                        <label for="tipoPlano">Qual plano gostaria de consultar?</label>
+                        <select id="tipoPlano">
+                            <option value="FaleMais 30" selected>FaleMais 30</option>
+                            <option value="FaleMais 60">FaleMais 60</option>
+                            <option value="FaleMais 120">FaleMais 120</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xl-4 col-md-4 col-sm-12" style="background-color:white">
+                    <section id="control-center">
+                        <button id="calcBtn">Quanto vou pagar?</button>
+                        <button id="rstBtn">Reiniciar</button>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"
+            integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
+        </script>
+    </footer>
 </body>
+<script>
+    $(document).ready(function () {
+        $("#tempoLigacao").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                alert("Apenas números vão nesse campo")
+                $("#tempoLigacao").value = "";
+                $("#tempoLigacao").focus();
+                return false;
+            } else if ($(this).val().length > 2) {
+                $("#tempoLigacao").value = "";
+                $("#tempoLigacao").focus();
+                alert("A quantidade de dígitos máxima foi atingida");
+                return false;
+            }
+        });
+    });
+</script>
 
 </html>
